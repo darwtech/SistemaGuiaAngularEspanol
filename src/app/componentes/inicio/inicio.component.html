@@ -1,0 +1,11 @@
+<section>
+    <form>
+<app-buscar></app-buscar>
+    </form>
+  </section>
+  <section class="results">
+   <app-localizacion-casa
+    *ngFor="let oc of Lista" [ocasa]="oc">
+  </app-localizacion-casa>
+
+  </section>
