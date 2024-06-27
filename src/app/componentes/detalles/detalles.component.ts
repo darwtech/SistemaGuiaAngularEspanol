@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CasaService } from '../../servicios/casa.service';
 import { CommonModule } from '@angular/common';
 import { casa } from '../../entidades/casa';
@@ -11,14 +11,45 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './detalles.component.html',
   styleUrl: './detalles.component.css'
 })
-export class DetallesComponent 
-{
-  route:ActivatedRoute=inject(ActivatedRoute);
-  oservice=inject(CasaService);
+export class DetallesComponent implements OnInit {
   clocalizacion: casa | undefined;
-  constructor()
-  {
-    const codigo=parseInt(this.route.snapshot.params['id'],10);
-    this.clocalizacion= this.oservice.getCasaId(codigo);
+  currentImageIndex = 0;
+
+constructor(private casaService: CasaService){}
+
+
+
+  ngOnInit(): void {
+    this.clocalizacion = this.casaService.getCasaId(0);
   }
+
+  prevImage() {
+    if (this.clocalizacion) {
+      if (this.currentImageIndex > 0) {
+        this.currentImageIndex--;
+      } else {
+        this.currentImageIndex = this.clocalizacion.foto.length - 1;
+      }
+    }
+  }
+
+  nextImage() {
+    if (this.clocalizacion) {
+      if (this.currentImageIndex < this.clocalizacion.foto.length - 1) {
+        this.currentImageIndex++;
+      } else {
+        this.currentImageIndex = 0;
+      }
+    }
+
+  }
+
+
+  setImage(index: number) {
+    this.currentImageIndex = index;
+  }
+
+
+
+
 }

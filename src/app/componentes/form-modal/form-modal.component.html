@@ -1,0 +1,45 @@
+<div x-show="isOpen" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-800 bg-opacity-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+    <h2 class="text-2xl font-semibold mb-4">Agregar Casa</h2>
+    <form (submit)="onSubmit()">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Nombre</label>
+        <input type="text" [(ngModel)]="casa.nombre" name="nombre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Ciudad</label>
+        <input type="text" [(ngModel)]="casa.ciudad" name="ciudad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Provincia</label>
+        <input type="text" [(ngModel)]="casa.provincia" name="provincia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Fotos</label>
+        <input type="file" (change)="onFileSelected($event)" multiple class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+        <div class="mt-2 flex flex-wrap">
+          <div *ngFor="let foto of casa.foto; let i = index" class="relative mr-2 mb-2">
+            <img [src]="foto" alt="Foto {{i+1}}" class="w-20 h-20 object-cover rounded">
+            <button type="button" (click)="removeFoto(i)" class="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">×</button>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Unidades</label>
+        <input type="number" [(ngModel)]="casa.unidades" name="unidades" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">WiFi</label>
+        <input type="checkbox" [(ngModel)]="casa.wifi" name="wifi" class="mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Lavanderia</label>
+        <input type="checkbox" [(ngModel)]="casa.lavanderia" name="lavanderia" class="mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+      </div>
+      <div class="flex justify-end">
+        <button type="button" (click)="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Cancelar</button>
+        <button type="submit" class="bg-indigo-500 text-white px-4 py-2 ml-2 rounded-md hover:bg-indigo-600">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
